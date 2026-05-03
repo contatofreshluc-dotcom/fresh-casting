@@ -1276,4 +1276,295 @@ a.case-item { display: block; text-decoration: none; color: inherit; }
     });
   });
 })();
+</script><style id="awge-mobile-fix">
+/* ================================================================
+   DEFINITIVE MOBILE FIX — sobrescreve tudo, mobile-first compacto
+   ================================================================ */
+@media (max-width: 768px) {
+
+  /* ——— HIDE NAV LINKS E CTA no topo ——— */
+  #mainNav .nav-links,
+  #mainNav .nav-cta,
+  #mainNav .nav-links a,
+  #mainNav button { display: none !important; }
+  #mainNav { padding: 1rem 1.4rem !important; }
+
+  /* ——— BOTTOM NAV: força visível ——— */
+  #mob-nav {
+    display: block !important;
+    position: fixed !important;
+    bottom: 0 !important; left: 0 !important; right: 0 !important;
+    z-index: 9999 !important;
+    background: #000 !important;
+    border-top: 1px solid rgba(255,255,255,0.1) !important;
+    padding: 0.5rem 0 calc(0.5rem + env(safe-area-inset-bottom, 0px)) !important;
+  }
+  #mob-nav .mnav-inner {
+    display: flex !important;
+    justify-content: space-around !important;
+    align-items: center !important;
+  }
+  #mob-nav button {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 3px !important;
+    padding: 6px 12px !important;
+    background: transparent !important;
+    border: none !important;
+    color: rgba(255,255,255,0.35) !important;
+    font-family: 'Space Mono', monospace !important;
+    font-size: 7px !important;
+    letter-spacing: 0.1em !important;
+    text-transform: uppercase !important;
+    min-width: 56px !important;
+  }
+  #mob-nav button.active { color: #fff !important; }
+  #mob-nav svg { width: 20px !important; height: 20px !important; }
+
+  /* Body: padding bottom = bottom nav + safe area */
+  body { padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px)) !important; }
+
+  /* ——— HERO: compacto, sem vazio ——— */
+  .hero {
+    min-height: unset !important;
+    height: auto !important;
+    padding: 5.5rem 1.4rem 2.5rem !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
+    text-align: left !important;
+    gap: 0 !important;
+  }
+  /* Esconde logo duplicado no hero — já temos no nav */
+  .hero .hero-logo { display: none !important; }
+  .hero .hero-scroll { display: none !important; }
+
+  .hero-tagline {
+    font-family: 'Bebas Neue', sans-serif !important;
+    font-size: clamp(54px, 15vw, 80px) !important;
+    line-height: 0.88 !important;
+    letter-spacing: -0.01em !important;
+    text-transform: uppercase !important;
+    margin: 0 0 0.6rem !important;
+    color: #fff !important;
+  }
+  .hero-sub {
+    font-size: 8px !important;
+    letter-spacing: 0.18em !important;
+    text-transform: uppercase !important;
+    color: rgba(255,255,255,0.35) !important;
+    margin: 0 0 1.6rem !important;
+    font-family: 'Space Mono', monospace !important;
+  }
+  .hero-btns {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    width: 100% !important;
+    margin: 0 !important;
+  }
+  .hero-btns button {
+    width: 100% !important;
+    padding: 15px 20px !important;
+    font-size: 10px !important;
+    letter-spacing: 0.15em !important;
+    text-align: center !important;
+    display: block !important;
+  }
+
+  /* ——— STATS: row scrollável ——— */
+  .stats-bar { padding: 2rem 0 !important; border-top: 1px solid rgba(255,255,255,0.08) !important; }
+  .stats-inner {
+    display: flex !important;
+    flex-direction: row !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+    gap: 0 !important;
+    padding: 0 1.4rem !important;
+  }
+  .stats-inner::-webkit-scrollbar { display: none !important; }
+  .stats-inner > div {
+    flex-shrink: 0 !important;
+    min-width: 50vw !important;
+    scroll-snap-align: start !important;
+    padding-right: 1.2rem !important;
+    border-right: 1px solid rgba(255,255,255,0.07) !important;
+    margin-right: 1.2rem !important;
+  }
+  .stat-number {
+    font-family: 'Bebas Neue', sans-serif !important;
+    font-size: clamp(44px, 13vw, 64px) !important;
+    line-height: 1 !important;
+  }
+  .stat-label { font-size: 8px !important; letter-spacing: 0.15em !important; }
+
+  /* ——— SECTIONS ——— */
+  .section { padding: 2.5rem 1.4rem !important; }
+  .section-label { font-size: 8px !important; letter-spacing: 0.2em !important; }
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif !important;
+    font-size: clamp(36px, 11vw, 56px) !important;
+    line-height: 0.9 !important;
+    text-transform: uppercase !important;
+  }
+
+  /* ——— CASES: carrossel horizontal forçado ——— */
+  #cases { overflow: hidden !important; }
+  .cases-grid {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    overflow-x: scroll !important;
+    overflow-y: hidden !important;
+    scroll-snap-type: x mandatory !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+    grid-template-columns: unset !important;
+    padding: 0 1.4rem 1rem !important;
+    gap: 10px !important;
+    width: 100% !important;
+  }
+  .cases-grid::-webkit-scrollbar { display: none !important; }
+  .case-item {
+    min-width: 70vw !important;
+    max-width: 70vw !important;
+    width: 70vw !important;
+    flex-shrink: 0 !important;
+    scroll-snap-align: start !important;
+  }
+  /* Swipe hint */
+  .cases-grid::after {
+    content: '' !important;
+    min-width: 1rem !important;
+    flex-shrink: 0 !important;
+    display: block !important;
+  }
+
+  /* ——— HIGHLIGHT ——— */
+  .highlight { padding: 3rem 1.4rem !important; }
+  .highlight-title {
+    font-family: 'Bebas Neue', sans-serif !important;
+    font-size: clamp(34px, 10vw, 52px) !important;
+    line-height: 0.9 !important;
+    text-transform: uppercase !important;
+  }
+
+  /* ——— SERVICES: lista compacta ——— */
+  .services-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    padding: 0 !important;
+    gap: 0 !important;
+  }
+  .service-card {
+    padding: 1.5rem 1.4rem !important;
+    border-radius: 0 !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-top: none !important;
+    border-bottom: 1px solid rgba(255,255,255,0.08) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    flex-direction: row !important;
+    gap: 1rem !important;
+  }
+  .service-card:first-child { border-top: 1px solid rgba(255,255,255,0.08) !important; }
+  .service-icon { display: none !important; }
+  .service-name {
+    font-family: 'Bebas Neue', sans-serif !important;
+    font-size: 20px !important;
+    text-transform: uppercase !important;
+    margin: 0 !important;
+    line-height: 1 !important;
+  }
+  .service-desc { display: none !important; }
+  .service-cta {
+    font-size: 18px !important;
+    color: rgba(255,255,255,0.3) !important;
+    letter-spacing: 0 !important;
+    flex-shrink: 0 !important;
+    font-family: inherit !important;
+  }
+
+  /* ——— ABOUT ——— */
+  .about-grid {
+    grid-template-columns: 1fr !important;
+    padding: 0 1.4rem !important;
+    gap: 2rem !important;
+  }
+  .about-title {
+    font-family: 'Bebas Neue', sans-serif !important;
+    font-size: clamp(34px, 10vw, 52px) !important;
+    text-transform: uppercase !important;
+    line-height: 0.9 !important;
+  }
+  .about-desc { font-size: 11px !important; line-height: 1.7 !important; }
+
+  /* ——— CONTACT / FORMS ——— */
+  .contact-block { padding: 2.5rem 1.4rem !important; }
+  .contact-grid { grid-template-columns: 1fr !important; }
+  .grid-2 { grid-template-columns: 1fr !important; }
+  .span-2 { grid-column: span 1 !important; }
+  input, select, textarea { font-size: 16px !important; }
+  .btn-row { flex-direction: column !important; }
+
+  /* ——— FOOTER ——— */
+  footer, .footer-bar, .site-footer-inner {
+    padding: 2rem 1.4rem !important;
+    flex-direction: column !important;
+    gap: 1rem !important;
+  }
+
+  /* ——— TAP FEEDBACK ——— */
+  .case-item:active { opacity: 0.7 !important; transform: scale(0.98) !important; }
+  .service-card:active { background: rgba(255,255,255,0.03) !important; }
+  button:active { opacity: 0.6 !important; }
+
+  /* ——— FORM SCREENS ——— */
+  #s-talent, #s-client, #s-services-booker, #s-services-mediakit, #s-login {
+    padding-top: 4.5rem !important;
+  }
+
+  /* ——— REMOVE SCANLINES on mobile (perf) ——— */
+  .hero::after { display: none !important; }
+}
+
+@media (max-width: 380px) {
+  .hero-tagline { font-size: 48px !important; }
+  .section-title { font-size: 34px !important; }
+  .case-item { min-width: 80vw !important; max-width: 80vw !important; width: 80vw !important; }
+}
+</style>
+
+<script>
+/* Bottom nav active state on scroll */
+(function(){
+  if(window.innerWidth > 768) return;
+  var sections = {
+    'mnav-cases': 'cases',
+    'mnav-services': 'services',
+    'mnav-contact': 'contact'
+  };
+  var btns = document.querySelectorAll('#mob-nav button');
+  function setActive(id){
+    btns.forEach(function(b){ b.classList.remove('active'); });
+    var el = document.getElementById(id);
+    if(el) el.classList.add('active');
+  }
+  setActive('mnav-home');
+  window.addEventListener('scroll', function(){
+    var y = window.scrollY + window.innerHeight/2;
+    var active = 'mnav-home';
+    Object.keys(sections).forEach(function(btnId){
+      var sec = document.getElementById(sections[btnId]);
+      if(sec && sec.offsetTop <= y) active = btnId;
+    });
+    setActive(active);
+  }, {passive: true});
+})();
 </script></body> </html>
