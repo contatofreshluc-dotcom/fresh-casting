@@ -640,20 +640,39 @@ footer, .footer-bar {
 
 /* ——— INTRO ——— */
 var intro = document.getElementById('awge-intro');
-var counter = intro.querySelector('.i-counter');
-var count = 0;
-var ci = setInterval(function(){
-  count += Math.floor(Math.random()*12)+4;
-  if(count>=100){ count=100; clearInterval(ci); }
-  counter.textContent = (count<10?'0':'')+count;
-},60);
-requestAnimationFrame(function(){
-  setTimeout(function(){ intro.classList.add('go'); },50);
-  setTimeout(function(){
-    intro.classList.add('out');
-    setTimeout(function(){ intro.remove(); },520);
-  },2000);
-});
+function killIntro(){
+  if(!intro) return;
+  intro.style.display = 'none';
+  intro.style.pointerEvents = 'none';
+  intro.style.zIndex = '-1';
+  try { intro.remove(); } catch(e){}
+  intro = null;
+}
+/* Skip intro on touch/mobile — Safari fixed overlay bug */
+if('ontouchstart' in window || window.innerWidth < 769){
+  killIntro();
+} else {
+  var counter = intro.querySelector('.i-counter');
+  var count = 0;
+  var ci = setInterval(function(){
+    count += Math.floor(Math.random()*12)+4;
+    if(count>=100){ count=100; clearInterval(ci); }
+    if(counter) counter.textContent = (count<10?'0':'')+count;
+  },60);
+  requestAnimationFrame(function(){
+    setTimeout(function(){ if(intro) intro.classList.add('go'); },50);
+    setTimeout(function(){
+      if(!intro) return;
+      intro.classList.add('out');
+      intro.style.pointerEvents = 'none';
+      setTimeout(killIntro, 520);
+    },2000);
+  });
+  /* Failsafe: tap anywhere dismisses intro */
+  document.addEventListener('click', function(){ killIntro(); }, {once:true});
+  /* Failsafe: force remove after 4s no matter what */
+  setTimeout(killIntro, 4000);
+}
 
 /* ——— CURSOR ——— */
 var dot  = document.getElementById('awge-dot');
