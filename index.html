@@ -785,4 +785,171 @@ window.addEventListener('load', function(){
 });
 
 })();
-</script></body> </html>
+</script><style id="awge-mobile">
+/* ============================================================
+   AWGE MOBILE — responsive fixes
+   ============================================================ */
+
+/* Cursor: sem hover em touch, esconde */
+@media (hover: none) {
+  #awge-dot, #awge-ring { display: none !important; }
+  *, *::before, *::after { cursor: auto !important; }
+}
+
+@media (max-width: 768px) {
+
+  /* ——— NAV ——— */
+  nav {
+    padding: 1.1rem 1.4rem !important;
+  }
+  .nav-cta button {
+    font-size: 9px !important;
+    padding: 8px 14px !important;
+    letter-spacing: 0.1em !important;
+  }
+
+  /* ——— HERO ——— */
+  .hero {
+    padding: 6.5rem 1.4rem 4rem !important;
+    min-height: 100svh !important;
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
+  }
+  .hero-logo { margin-bottom: 2rem !important; }
+  .hero-tagline {
+    font-size: clamp(52px, 15vw, 80px) !important;
+    line-height: 0.9 !important;
+    letter-spacing: -0.01em !important;
+  }
+  .hero-sub {
+    font-size: 8px !important;
+    letter-spacing: 0.18em !important;
+    margin-top: 1rem !important;
+  }
+  .hero-btns {
+    flex-direction: column !important;
+    gap: 8px !important;
+    width: 100% !important;
+    margin-top: 2rem !important;
+  }
+  .hero-btns button {
+    width: 100% !important;
+    text-align: center !important;
+    padding: 14px 20px !important;
+    justify-content: center !important;
+  }
+  .hero-scroll {
+    bottom: 1.5rem !important;
+    font-size: 8px !important;
+  }
+
+  /* ——— STATS ——— */
+  .stats-bar { padding: 2.5rem 1.4rem !important; }
+  .stats-inner {
+    flex-direction: column !important;
+    gap: 2rem !important;
+  }
+  .stat-number {
+    font-size: clamp(44px, 13vw, 64px) !important;
+  }
+  .stat-label { font-size: 8px !important; }
+
+  /* ——— SECTIONS ——— */
+  .section { padding: 3rem 1.4rem !important; }
+  .section-label { font-size: 8px !important; letter-spacing: 0.18em !important; }
+  .section-title {
+    font-size: clamp(38px, 11vw, 60px) !important;
+    line-height: 0.9 !important;
+  }
+
+  /* ——— CASES ——— */
+  .cases-grid {
+    grid-template-columns: 1fr !important;
+    padding: 0 1.4rem 3rem !important;
+    gap: 12px !important;
+  }
+
+  /* ——— SERVICES ——— */
+  .services-grid {
+    grid-template-columns: 1fr !important;
+    padding: 1.5rem 1.4rem 3rem !important;
+    gap: 0 !important;
+  }
+  .service-card { padding: 2rem 1.4rem !important; }
+  .service-name {
+    font-size: clamp(28px, 8vw, 40px) !important;
+    margin-bottom: 0.75rem !important;
+  }
+  .service-desc { font-size: 10px !important; }
+  .service-cta { font-size: 8px !important; }
+
+  /* ——— HIGHLIGHT ——— */
+  .highlight { padding: 3.5rem 1.4rem !important; }
+  .highlight-title {
+    font-size: clamp(36px, 10vw, 56px) !important;
+    line-height: 0.9 !important;
+    margin-bottom: 1.5rem !important;
+  }
+  .highlight-eyebrow { font-size: 8px !important; }
+  .highlight-sub { font-size: 11px !important; }
+
+  /* ——— ABOUT ——— */
+  .about-grid {
+    grid-template-columns: 1fr !important;
+    padding: 0 1.4rem !important;
+    gap: 2rem !important;
+  }
+  .about-title {
+    font-size: clamp(32px, 9vw, 52px) !important;
+  }
+  .about-desc { font-size: 10px !important; }
+
+  /* ——— CONTACT ——— */
+  .contact-block { padding: 3rem 1.4rem !important; }
+  .contact-title {
+    font-size: clamp(30px, 9vw, 52px) !important;
+    margin-bottom: 2rem !important;
+  }
+  .contact-grid { grid-template-columns: 1fr !important; gap: 1.5rem !important; }
+
+  /* ——— FORMS ——— */
+  .grid-2 { grid-template-columns: 1fr !important; }
+  .span-2 { grid-column: span 1 !important; }
+  .field label { font-size: 8px !important; }
+  input, select, textarea { font-size: 12px !important; }
+  .pill { font-size: 9px !important; padding: 5px 10px !important; }
+  .btn-row { flex-direction: column !important; }
+  .btn-row .flex1 { width: 100% !important; }
+
+  /* ——— FOOTER ——— */
+  footer, .footer-bar {
+    padding: 2rem 1.4rem !important;
+    flex-direction: column !important;
+    gap: 1.5rem !important;
+    text-align: left !important;
+  }
+  .site-footer-inner {
+    flex-direction: column !important;
+    gap: 1rem !important;
+  }
+
+  /* ——— INTRO ——— */
+  #awge-intro .i-logo svg { width: 72px !important; }
+  #awge-intro .i-tag { font-size: 8px !important; letter-spacing: 0.25em !important; }
+
+  /* ——— TALENT/CLIENT SCREENS ——— */
+  .screen { padding-top: 5rem !important; }
+  .screen .section { padding: 2rem 1.4rem !important; }
+  h2 { font-size: clamp(32px, 9vw, 52px) !important; }
+
+  /* ——— PARTNER TAGS ——— */
+  .partner-tag { padding: 5px 10px !important; font-size: 8px !important; }
+
+}
+
+@media (max-width: 380px) {
+  .hero-tagline { font-size: 46px !important; }
+  .section-title { font-size: 36px !important; }
+  .highlight-title { font-size: 34px !important; }
+}
+</style></body> </html>
