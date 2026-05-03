@@ -163,6 +163,9 @@ a.case-item,div.case-item { display:block; background:#000; padding:1.5rem; colo
 /* —— SCREENS —— */
 .screen { display:none; } .screen.active { display:block; }
 
+/* Hide mobile navs on desktop */
+#mob-topbar, #mob-botnav { display:none; }
+
 /* =============================================
    MOBILE — max-width: 768px
    ============================================= */
@@ -175,7 +178,7 @@ a.case-item,div.case-item { display:block; background:#000; padding:1.5rem; colo
   #mob-topbar {
     position:fixed; top:0; left:0; right:0; z-index:500;
     background:#000; border-bottom:1px solid rgba(255,255,255,0.08);
-    padding:.9rem 1.4rem; display:flex; align-items:center; justify-content:space-between;
+    padding:.9rem 1.4rem; display:flex !important; align-items:center; justify-content:space-between;
   }
   #mob-topbar .mob-logo svg { width:52px; height:auto; fill:#fff; display:block; }
   #mob-topbar .mob-ctas { display:flex; gap:8px; }
@@ -257,7 +260,7 @@ a.case-item,div.case-item { display:block; background:#000; padding:1.5rem; colo
   #s-talent,#s-client,#s-services-booker,#s-services-mediakit,#s-login { padding-top:0 !important; }
 }
 </style></head> <body><!-- MOBILE NAV -->
-<div id="mob-topbar" style="display:none">
+<div id="mob-topbar">
   <div class="mob-logo">
     <svg viewBox="0 0 1610.48 930.3" width="52"><path d="M649.11,715.91c-79.16-42.21-151.65-97.41-218.6-162.13-73.25-70.82-133.78-151.89-152.07-256.43-16.47-94.15,26.09-172.43,119.1-193.83,59.67-13.73,124.76-12.39,186.38-6.64,53.05,4.95,104.63,25.7,156.87,39.46C579.86,46.17,411.28-18.42,223.19,4.74,82.6,22.04-1.63,99.54.02,220.74c.93,67.93,23.1,142.33,56.78,201.89,137.08,242.4,351.98,389.81,607.02,481.61l21.04-171.45c-11.01-5.25-24.99-11.14-35.75-16.88Z"/><path d="M1103.69,918.15c155.34-33.47,238.71-194.51,164.46-319.05-9.41,98.02-47.78,153.32-131.02,169.32-52.67,10.12-109.22,13.59-162.16,6.36-11.2-1.53-22.28-3.33-33.26-5.32l-9.51,158.16c56.42,5.34,113.61,3.02,171.49-9.46Z"/><path d="M692.22,930.3h206.32l22.11-367.63c2.81-46.78,41.59-83.28,88.45-83.26l393.46.18v-66.71h-522.9c-75.79,0-139.33,57.25-147.21,132.62l-40.23,384.8Z"/><path d="M749.55,359.34l8.06-90.71c6.51-73.29,67.92-129.48,141.5-129.48h711.37v74.57l-586.87-2.47c-45.89-.19-84.13,35.11-87.6,80.86l-5.1,67.22h-181.37Z"/></svg>
   </div>
@@ -266,7 +269,7 @@ a.case-item,div.case-item { display:block; background:#000; padding:1.5rem; colo
     <button class="btn-primary" onclick="showScreen('s-client')">Projeto</button>
   </div>
 </div>
-<nav id="mob-botnav" style="display:none">
+<nav id="mob-botnav">
   <a href="#" onclick="showScreen('s-home');scrollTo(0,0);return false" id="mbn-home">
     <svg viewBox="0 0 24 24"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H5a1 1 0 01-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg>
     Início
@@ -285,12 +288,8 @@ a.case-item,div.case-item { display:block; background:#000; padding:1.5rem; colo
   </a>
 </nav>
 <script>
-/* Show mobile nav only on mobile */
+/* Bottom nav active state on scroll */
 (function(){
-  if(window.innerWidth > 768) return;
-  document.getElementById('mob-topbar').style.display='flex';
-  document.getElementById('mob-botnav').style.display='flex';
-  /* Active state */
   var btns={'mbn-cases':'cases','mbn-services':'services','mbn-contact':'contact'};
   window.addEventListener('scroll',function(){
     var y=window.scrollY+200, active='mbn-home';
@@ -307,202 +306,13 @@ a.case-item,div.case-item { display:block; background:#000; padding:1.5rem; colo
 <!-- Intro DOM -->
 
 
-<script>
-(function(){
-'use strict';
-
-/* ——— INTRO ——— */
-var intro = document.getElementById('awge-intro');
-function killIntro(){
-  if(!intro) return;
-  intro.style.display = 'none';
-  intro.style.pointerEvents = 'none';
-  intro.style.zIndex = '-1';
-  try { intro.remove(); } catch(e){}
-  intro = null;
-}
-/* Skip intro on touch/mobile — Safari fixed overlay bug */
-if('ontouchstart' in window || window.innerWidth < 769){
-  killIntro();
-} else {
-  var counter = intro.querySelector('.i-counter');
-  var count = 0;
-  var ci = setInterval(function(){
-    count += Math.floor(Math.random()*12)+4;
-    if(count>=100){ count=100; clearInterval(ci); }
-    if(counter) counter.textContent = (count<10?'0':'')+count;
-  },60);
-  requestAnimationFrame(function(){
-    setTimeout(function(){ if(intro) intro.classList.add('go'); },50);
-    setTimeout(function(){
-      if(!intro) return;
-      intro.classList.add('out');
-      intro.style.pointerEvents = 'none';
-      setTimeout(killIntro, 520);
-    },2000);
-  });
-  /* Failsafe: tap anywhere dismisses intro */
-  document.addEventListener('click', function(){ killIntro(); }, {once:true});
-  /* Failsafe: force remove after 4s no matter what */
-  setTimeout(killIntro, 4000);
-}
-
-/* ——— CURSOR ——— */
-var dot  = document.getElementById('awge-dot');
-var ring = document.getElementById('awge-ring');
-var rx=window.innerWidth/2, ry=window.innerHeight/2;
-var raf;
-function lerp(a,b,t){ return a+(b-a)*t; }
-function loop(){
-  rx = lerp(rx, mx, 0.13);
-  ry = lerp(ry, my, 0.13);
-  ring.style.left = rx+'px';
-  ring.style.top  = ry+'px';
-  raf = requestAnimationFrame(loop);
-}
-var mx=rx, my=ry;
-document.addEventListener('mousemove',function(e){
-  mx=e.clientX; my=e.clientY;
-  dot.style.left=mx+'px'; dot.style.top=my+'px';
-  dot.classList.remove('hidden'); ring.classList.remove('hidden');
-});
-document.addEventListener('mouseleave',function(){
-  dot.classList.add('hidden'); ring.classList.add('hidden');
-});
-loop();
-document.addEventListener('mousedown',function(){
-  dot.style.transform='translate(-50%,-50%) scale(1.8)';
-});
-document.addEventListener('mouseup',function(){
-  dot.style.transform='translate(-50%,-50%) scale(1)';
-});
-function onHoverIn(){
-  ring.style.width='52px'; ring.style.height='52px';
-  ring.style.borderColor='rgba(255,255,255,0.7)';
-}
-function onHoverOut(){
-  ring.style.width='32px'; ring.style.height='32px';
-  ring.style.borderColor='rgba(255,255,255,0.4)';
-}
-function bindHover(el){
-  el.addEventListener('mouseenter',onHoverIn);
-  el.addEventListener('mouseleave',onHoverOut);
-}
-document.querySelectorAll('button,a,[onclick]').forEach(bindHover);
-
-/* ——— GLITCH ——— */
-function glitch(el, ms){
-  el.classList.add('on');
-  setTimeout(function(){ el.classList.remove('on'); }, ms||130);
-}
-function scheduleGlitch(el){
-  setTimeout(function(){
-    glitch(el, 80+Math.random()*160);
-    scheduleGlitch(el);
-  }, 2200+Math.random()*6000);
-}
-function wrapGlitch(el){
-  var txt = el.textContent.trim();
-  if(!txt) return;
-  var span = document.createElement('span');
-  span.className = 'gw';
-  span.setAttribute('data-text', txt);
-  span.innerHTML = el.innerHTML;
-  el.innerHTML = '';
-  el.appendChild(span);
-  scheduleGlitch(span);
-}
-
-/* ——— SCRAMBLE (nav links) ——— */
-var CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/*@#';
-function scramble(el){
-  var orig = el.getAttribute('data-orig') || el.textContent;
-  el.setAttribute('data-orig', orig);
-  var f=0, total=10;
-  var iv = setInterval(function(){
-    el.textContent = orig.split('').map(function(c,i){
-      if(c===' ') return ' ';
-      return f/total > i/orig.length
-        ? orig[i]
-        : CHARS[Math.floor(Math.random()*CHARS.length)];
-    }).join('');
-    f++;
-    if(f>total){ el.textContent=orig; clearInterval(iv); }
-  }, 35);
-}
-document.querySelectorAll('.nav-links a').forEach(function(a){
-  a.addEventListener('mouseenter', function(){ scramble(a); });
-});
-
-/* ——— SCROLL REVEAL ——— */
-var rvSels = [
-  '.stats-bar','.stat-number','.stat-label',
-  '.section-label','.section-title',
-  '.case-card','.service-card',
-  '.highlight-eyebrow','.highlight-title','.highlight-sub',
-  '.about-grid > *','.contact-block > *','footer'
-];
-var io = new IntersectionObserver(function(entries){
-  entries.forEach(function(e){
-    if(e.isIntersecting){
-      e.target.classList.add('in');
-      io.unobserve(e.target);
-    }
-  });
-}, { threshold: 0.06 });
-function initReveal(){
-  rvSels.forEach(function(sel){
-    document.querySelectorAll(sel).forEach(function(el,i){
-      if(!el.classList.contains('rv')){
-        el.classList.add('rv');
-        el.style.transitionDelay = (i * 0.055)+'s';
-        io.observe(el);
-      }
-    });
-  });
-}
-
-/* ——— LOGO FLICKER + init on load ——— */
-window.addEventListener('load', function(){
-  document.querySelectorAll('.logo-svg').forEach(function(s){
-    s.classList.add('lf');
-  });
-  var tagline = document.querySelector('.hero-tagline');
-  if(tagline) wrapGlitch(tagline);
-  document.querySelectorAll('.highlight-title').forEach(wrapGlitch);
-  initReveal();
-  // re-run reveal for dynamic content (cases grid)
-  setTimeout(initReveal, 800);
-  setTimeout(initReveal, 2000);
-});
-
-})();
-</script><!-- ============================================================
+<!-- ============================================================
      MOBILE NATIVE REDESIGN — bottom nav · swipe carousel · app feel
      ============================================================ -->
 
 
 
 
-<script>
-// Wrap service card content in a body div for flex layout
-(function(){
-  document.addEventListener('DOMContentLoaded', function(){
-    document.querySelectorAll('.service-card').forEach(function(card){
-      // Only wrap if not already wrapped
-      if(card.querySelector('.service-card-body')) return;
-      var body = document.createElement('div');
-      body.className = 'service-card-body';
-      var cta = card.querySelector('.service-cta');
-      while(card.firstChild){
-        if(card.firstChild === cta) break;
-        body.appendChild(card.firstChild);
-      }
-      card.insertBefore(body, cta);
-      if(cta) cta.textContent = '→';
-    });
-  });
-})();
-</script>
+
 
 </body> </html>
