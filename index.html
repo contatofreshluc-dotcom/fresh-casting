@@ -401,7 +401,7 @@ body::after {
   },{passive:true});
 })();
 </script> <div id="toast"></div> <nav id="mainNav">   <div class="nav-logo" onclick="showScreen('s-home');scrollTo(0,0)">     <img src="logo-3d.png" style="width:52px;height:auto;display:block;" alt="Fresh Casting"/>   </div>   <div class="nav-links">     <a onclick="scrollToSection('cases')">Cases</a>     <a onclick="scrollToSection('services')">Serviços</a>     <a onclick="scrollToSection('society')">Fresh Access</a>     <a onclick="scrollToSection('contact')">Contato</a>   </div>   <div class="nav-cta">     <button class="btn-ghost" onclick="showScreen('s-talent')">Apply for Access</button>     <button class="btn-primary" onclick="showScreen('s-client')">Start a Project</button>   </div> </nav> <div class="screen active" id="s-home">   <section class="hero">     <video autoplay muted loop playsinline id="heroVideo" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);min-width:100%;min-height:100%;width:auto;height:auto;object-fit:cover;opacity:0.35;z-index:0;pointer-events:none;"><source src="intro.mp4" type="video/mp4"/></video>     <div class="hero-logo">       <img src="logo-branco.png" style="width:min(280px,58vw);height:auto;display:block;" alt="Fresh Casting"/>     </div>     <p class="hero-tagline">Discovering the New</p>     <p class="hero-sub">Creative Casting · Cultural Direction · São Paulo</p>     <div class="hero-btns">       <button class="btn-primary" onclick="showScreen('s-client')" style="font-size:13px;padding:14px 32px;">Start a Project</button>       <button style="font-size:13px;padding:14px 32px;" onclick="showScreen('s-talent')">Apply for Access</button>     </div>     <div class="hero-scroll">↓ scroll</div>   </section>   <div class="stats-bar"><div class="stats-inner">     <div><div class="stat-number"><span>+406</span>M</div><div class="stat-label">views em projetos assinados</div></div>     <div><div class="stat-number">18</div><div class="stat-label">videoclipes dirigidos</div></div>     <div><div class="stat-number" style="font-size:clamp(18px,3vw,28px);line-height:1.2;">CEO<br>Brandão</div><div class="stat-label">+15M views · álbum completo</div></div>   </div></div>   <div id="cases">     <div class="section" style="padding-bottom:0;"><div class="section-label">Selected Work</div><div class="section-title">Projetos com <em>impacto cultural</em></div></div>     <div class="cases-grid" id="casesGrid"></div>   </div>   <div class="highlight" id="townHighlight" style="position:relative;overflow:hidden;">
-  <video id="townVideo" src="thetown.mp4" muted playsinline preload="metadata" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);min-width:100%;min-height:100%;width:auto;height:auto;object-fit:cover;opacity:0.45;z-index:0;pointer-events:none;"></video>
+  <video id="townVideo" src="thetown.mp4" muted loop playsinline preload="metadata" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);min-width:100%;min-height:100%;width:auto;height:auto;object-fit:cover;opacity:0.45;z-index:0;pointer-events:none;"></video>
   <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(8,8,8,0.85) 40%,rgba(8,8,8,0.3));z-index:1;"></div>
   <div class="highlight-inner" style="position:relative;z-index:2;">
     <div class="highlight-eyebrow">Cultural Impact · 2025</div>
@@ -511,20 +511,8 @@ body::after {
 
 
 
-(function(){
-  var v=document.getElementById('townVideo');
-  if(!v)return;
-  var START=9,END=32;
-  v.addEventListener('loadedmetadata',function(){v.currentTime=START;});
-  v.addEventListener('timeupdate',function(){if(v.currentTime>=END)v.currentTime=START;});
-  var obs=new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if(e.isIntersecting){v.play().catch(function(){});}
-      else{v.pause();}
-    });
-  },{threshold:0.1});
-  obs.observe(document.getElementById('townHighlight'));
-})();</body> </html>
+(function(){var v=document.getElementById('townVideo');if(!v)return;new IntersectionObserver(function(e){e[0].isIntersecting?v.play().catch(function(){}):v.pause();},{threshold:0.1}).observe(document.getElementById('townHighlight'));})();</body> </html>
+
 
 
 
