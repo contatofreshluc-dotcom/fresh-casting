@@ -90,7 +90,8 @@ textarea { resize:none; }
 #toast.show { opacity:1; }
 
 /* —— HERO (DESKTOP) —— */
-.hero { min-height:100vh; min-height:100svh; display:flex; flex-direction:column; align-items:flex-start; justify-content:flex-end; padding:0 3rem 8vh; position:relative; }
+.hero { min-height:100vh; min-height:100svh; display:flex; flex-direction:column; align-items:flex-start; justify-content:flex-end; padding:0; position:relative; overflow:hidden; }
+.hero .hero-content { display:flex; flex-direction:column; align-items:flex-start; justify-content:flex-end; padding:0 3rem 8vh; position:relative; z-index:2; width:100%; height:100%; }
 .hero-logo { margin-bottom:3rem; }
 .hero-tagline { font-size:clamp(72px,12vw,180px); color:#fff; margin:0 0 1rem; }
 .hero-sub { font-size:9px; letter-spacing:.25em; text-transform:uppercase; color:var(--text2); margin-bottom:2rem; font-family:'Space Mono',monospace; }
@@ -163,42 +164,52 @@ a.case-item,div.case-item { display:block; background:#000; padding:1.5rem; colo
 /* —— SCREENS —— */
 .screen { display:none; } .screen.active { display:block; }
 
-/* Home page - Video on top */
+/* Home page - Video background */
 #s-home {
   background: #000;
   position: relative;
 }
 
 #s-home .hero {
-  background-image: url(interview.mp4);
-}
-
-/* Interview video player */
-.interview-player {
-  width: 100%;
-  height: 100vh;
-  background: #000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   position: relative;
-  z-index: 1;
   overflow: hidden;
-  margin: 0;
-  padding: 0;
+  z-index: 1;
 }
 
-.interview-player video {
+#s-home .hero video {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  display: block;
+  object-fit: cover;
+  z-index: 0;
   margin: 0;
   padding: 0;
+  display: block;
 }
 
-.interview-player video::-webkit-media-controls {
+#s-home .hero video::-webkit-media-controls {
   display: none !important;
+}
+
+/* Dark overlay for video background */
+#s-home .hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.6));
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Hero content on top of video */
+#s-home .hero-content {
+  position: relative;
+  z-index: 2;
 }
 
 /* Talent gallery background at bottom */
@@ -464,7 +475,7 @@ body::after {
     var el=document.getElementById(active);if(el)el.classList.add('active');
   },{passive:true});
 })();
-</script> <div id="toast"></div> <nav id="mainNav">   <div class="nav-logo" onclick="showScreen('s-home');scrollTo(0,0)">     <img src="logo-3d.png" style="width:52px;height:auto;display:block;" alt="Fresh Casting"/>   </div>   <div class="nav-links">     <a onclick="scrollToSection('cases')">Cases</a>     <a onclick="scrollToSection('services')">Serviços</a>     <a onclick="scrollToSection('society')">Fresh Access</a>     <a onclick="scrollToSection('contact')">Contato</a>   </div>   <div class="nav-cta">     <button class="btn-ghost" onclick="showScreen('s-talent')">Apply for Access</button>     <button class="btn-primary" onclick="showScreen('s-client')">Start a Project</button>   </div> </nav> <div class="screen active" id="s-home">   <div class="interview-player"><video autoplay muted loop playsinline style="width:100%;height:100%;"><source src="interview.mp4" type="video/mp4">Seu navegador não suporta o elemento de vídeo.</video></div>   <section class="hero">          <div class="hero-logo">       <img src="logo-branco.png" style="width:min(280px,58vw);height:auto;display:block;" alt="Fresh Casting"/>     </div>     <p class="hero-tagline">Discovering the New</p>     <p class="hero-sub">Creative Casting · Cultural Direction · São Paulo</p>     <div class="hero-btns">       <button class="btn-primary" onclick="showScreen('s-client')" style="font-size:13px;padding:14px 32px;">Start a Project</button>       <button style="font-size:13px;padding:14px 32px;" onclick="showScreen('s-talent')">Apply for Access</button>     </div>     <div class="hero-scroll">↓ scroll</div>   </section>   <div class="stats-bar"><div class="stats-inner">     <div><div class="stat-number"><span>+406</span>M</div><div class="stat-label">views em projetos assinados</div></div>     <div><div class="stat-number">18</div><div class="stat-label">videoclipes dirigidos</div></div>     <div><div class="stat-number" style="font-size:clamp(18px,3vw,28px);line-height:1.2;">CEO<br>Brandão</div><div class="stat-label">+15M views · álbum completo</div></div>   </div></div>   <div id="cases">     <div class="section" style="padding-bottom:0;"><div class="section-label">Selected Work</div><div class="section-title">Projetos com <em>impacto cultural</em></div></div>     <div class="cases-grid" id="casesGrid"></div>   </div>   <div class="highlight" id="townHighlight" style="position:relative;overflow:hidden;">
+</script> <div id="toast"></div> <nav id="mainNav">   <div class="nav-logo" onclick="showScreen('s-home');scrollTo(0,0)">     <img src="logo-3d.png" style="width:52px;height:auto;display:block;" alt="Fresh Casting"/>   </div>   <div class="nav-links">     <a onclick="scrollToSection('cases')">Cases</a>     <a onclick="scrollToSection('services')">Serviços</a>     <a onclick="scrollToSection('society')">Fresh Access</a>     <a onclick="scrollToSection('contact')">Contato</a>   </div>   <div class="nav-cta">     <button class="btn-ghost" onclick="showScreen('s-talent')">Apply for Access</button>     <button class="btn-primary" onclick="showScreen('s-client')">Start a Project</button>   </div> </nav> <div class="screen active" id="s-home">   <section class="hero">     <video autoplay muted loop playsinline><source src="interview.mp4" type="video/mp4">Seu navegador não suporta o elemento de vídeo.</video>     <div class="hero-content">       <div class="hero-logo">         <img src="logo-branco.png" style="width:min(280px,58vw);height:auto;display:block;" alt="Fresh Casting"/>       </div>       <p class="hero-tagline">Discovering the New</p>       <p class="hero-sub">Creative Casting · Cultural Direction · São Paulo</p>       <div class="hero-btns">         <button class="btn-primary" onclick="showScreen('s-client')" style="font-size:13px;padding:14px 32px;">Start a Project</button>         <button style="font-size:13px;padding:14px 32px;" onclick="showScreen('s-talent')">Apply for Access</button>       </div>       <div class="hero-scroll">↓ scroll</div>     </div>   </section>   <div class="stats-bar"><div class="stats-inner">     <div><div class="stat-number"><span>+406</span>M</div><div class="stat-label">views em projetos assinados</div></div>     <div><div class="stat-number">18</div><div class="stat-label">videoclipes dirigidos</div></div>     <div><div class="stat-number" style="font-size:clamp(18px,3vw,28px);line-height:1.2;">CEO<br>Brandão</div><div class="stat-label">+15M views · álbum completo</div></div>   </div></div>   <div id="cases">     <div class="section" style="padding-bottom:0;"><div class="section-label">Selected Work</div><div class="section-title">Projetos com <em>impacto cultural</em></div></div>     <div class="cases-grid" id="casesGrid"></div>   </div>   <div class="highlight" id="townHighlight" style="position:relative;overflow:hidden;">
   <video id="townVideo" src="thetown.mp4" muted loop playsinline preload="metadata" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);min-width:100%;min-height:100%;width:auto;height:auto;object-fit:cover;opacity:0.45;z-index:0;pointer-events:none;"></video>
   <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(8,8,8,0.85) 40%,rgba(8,8,8,0.3));z-index:1;"></div>
   <div class="highlight-inner" style="position:relative;z-index:2;">
