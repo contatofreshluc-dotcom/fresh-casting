@@ -39,7 +39,7 @@ h1, h2, h3 {
 
 /* —— NAV —— */
 nav#mainNav {
-  position:fixed; top:0; left:0; right:0; z-index:100;
+  position:fixed; top:0; left:0; right:0; z-index:1000;
   padding:1.25rem 2rem; display:flex; align-items:center; justify-content:space-between;
   border-bottom:1px solid transparent; transition:border-color .3s,background .3s;
 }
@@ -184,6 +184,8 @@ a.case-item,div.case-item { display:block; background:#000; padding:1.5rem; colo
   position: relative;
   z-index: 1;
   overflow: hidden;
+  margin: 0;
+  padding: 0;
 }
 
 .interview-player video {
@@ -191,6 +193,12 @@ a.case-item,div.case-item { display:block; background:#000; padding:1.5rem; colo
   height: 100%;
   object-fit: cover;
   display: block;
+  margin: 0;
+  padding: 0;
+}
+
+.interview-player video::-webkit-media-controls {
+  display: none !important;
 }
 
 /* Talent gallery background at bottom */
