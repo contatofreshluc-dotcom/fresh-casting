@@ -505,7 +505,7 @@ body::after {
 
 /* ── CURSOR (desktop only) ── */
 @media (hover:hover) and (pointer:fine) {
-  * { cursor:none !important; }
+  #s-home, #s-home * { cursor:none !important; } #s-talent, #s-talent *, #s-client, #s-client *, [id^="s-services"], [id^="s-services"] *, #s-mediakit, #s-mediakit *, #s-society, #s-society *, #s-login, #s-login *, #s-admin, #s-admin * { cursor:auto !important; } #s-talent a, #s-talent button, #s-client a, #s-client button, [id^="s-services"] a, [id^="s-services"] button, #s-society a, #s-society button, #s-login a, #s-login button, #s-admin a, #s-admin button, .pill, .service-card, .case-item, [onclick] { cursor:pointer !important; }
   #cursor-dot {
     position:fixed; width:5px; height:5px; background:#fff;
     pointer-events:none; z-index:9999; border-radius:50%;
