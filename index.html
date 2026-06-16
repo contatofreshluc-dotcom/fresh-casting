@@ -509,7 +509,7 @@ body::after {
   #cursor-dot {
     position:fixed; width:5px; height:5px; background:#fff;
     pointer-events:none; z-index:9999; border-radius:50%;
-    transform:translate(-50%,-50%);
+    transform:translate(-50%,-50%); left:-200px; top:-200px;
   }
   #cursor-ring {
     position:fixed; width:28px; height:28px;
@@ -517,7 +517,7 @@ body::after {
     pointer-events:none; z-index:9998;
     transform:translate(-50%,-50%);
     transition:width .15s, height .15s, border-color .15s;
-    mix-blend-mode:difference;
+    left:-200px; top:-200px;
   }
 }
 
